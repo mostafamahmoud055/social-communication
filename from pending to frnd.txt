@@ -1,0 +1,22 @@
+//------------------------------------------------------------------
+		//Add to Frnd List if state = 1 
+		$incom_frnd="SELECT `id`,`parent_user` FROM  `friends` WHERE `chiled_user`='$my_id'  AND `state`='1'";
+		$income_frnd=mysqli_query($con,$incom_frnd);
+		while ($frnd=mysqli_fetch_assoc($income_frnd)){
+			 $parent_user=$frnd['parent_user'];
+			 $frnd_record=$frnd['id'];
+			$display="SELECT `id`,`ext`,`username` FROM `users` WHERE `id`='$parent_user'";
+			$display_query =mysqli_query($con,$display);
+			while($display_row=mysqli_fetch_assoc($display_query)){
+				$user_id=$display_row['id'];
+				$user=$display_row['username'];
+				$pic='users-pic/'.$display_row['id'].'.'.$display_row['ext'];			
+		   ?>
+					<div id="user" style="display:inline-table">        
+						<p align="center"><img src="<?php echo $pic; ?>" title="<?php echo $user; ?>" width="42" height="42">
+						<br>
+						<?php echo $user; ?>    
+					</p>
+                    <?php }}
+		//---------------------------------------------------------------------------------
+		
